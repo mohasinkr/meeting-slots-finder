@@ -1,5 +1,5 @@
 import { getRedisData } from '@/lib/getRedisData';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const key = 'participants'; // Replace with your actual key

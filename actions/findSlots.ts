@@ -2,7 +2,7 @@
 
 import { addMinutes, format, isAfter, isBefore, parse } from "date-fns";
 import { getRedisData } from "../lib/getRedisData";
-import { FolderInput } from "lucide-react";
+import { testInput } from "@/constants/sampleData";
 // import { participantAvailability, testInput, schedules } from "@/constants/sampleData";
 
 interface Participant {
@@ -43,7 +43,7 @@ export async function findOverlappingSlot(data: CheckAvailabilityRequest): Promi
     "participant_ids": data.participant_ids,
     date_range: data.date_range,
     participants,
-    availability: participantAvailability,
+    availability: participantAvailability[0],
     schedules,
   });
   // const availableSlots = checkParticipantAvailableSlots({
@@ -84,16 +84,21 @@ function checkParticipantAvailableSlots({
     date = addMinutes(date, 1440)
   ) {
     const day = format(date, "EEEE");
+    console.log("day", day);
     const formattedDate = format(date, "dd/MM/yyyy");
+    // console.log("formattedDate", formattedDate);
 
     const participantSlots: string[][] = [];
     participant_ids.forEach((id) => {
       const dailyAvailability = availability[id]?.[day] || [];
+      console.log("dailyAvailability", dailyAvailability);
       const existingSchedules = schedules[id]?.[formattedDate] || [];
 
       const slots = get30MinuteSlots(dailyAvailability, existingSchedules, participants[id]?.threshold);
       participantSlots.push(slots);
     });
+
+    console.log("participantSlots", participantSlots);
 
     // Find common 30-minute slots across all participants
     const dailyCommonSlots = findCommonSlots(participantSlots);

@@ -9,7 +9,7 @@ export async function getRedisData(key:string) {
     // If data is found, parse it to get the JavaScript object
     if (data) {
       const response = JSON.parse(data);
-      console.log(JSON.stringify(response, null, 2));
+      // console.log(JSON.stringify(response, null, 2));
       return response;
     } else {
       console.log('No data found for key "participants"');

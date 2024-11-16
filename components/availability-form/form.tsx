@@ -13,8 +13,6 @@ import { useState } from "react";
 import AvailableSlots from "./available-slots";
 import LoadingSpinner from "../ui/loading-spinner";
 import { format } from "date-fns";
-import { setRedisData } from "@/actions/setRedisData";
-import { participantAvailability, schedules } from "@/constants/sampleData";
 
 export type ParticipantArrayItem = {
   value: string;
@@ -66,6 +64,8 @@ const AvailabilityForm = () => {
       const response = await findOverlappingSlot(finalData);
       setAvailableSlots(response);
       console.log(response, "response");
+    }catch(err){
+      console.log(err, "err");
     } finally {
       setLoading(false); // End loading
     }
