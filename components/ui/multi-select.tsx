@@ -100,7 +100,7 @@ export function MultiSelect({ selected, setSelected }: MultiSelectProps) {
     (participants) => !selected.includes(participants)
   );
 
-  console.log(selected, "selected");
+  // console.log(selected, "selected");
 
   return (
     <Command
@@ -138,7 +138,7 @@ export function MultiSelect({ selected, setSelected }: MultiSelectProps) {
             onValueChange={setInputValue}
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
-            placeholder="Select frameworks..."
+            placeholder="Select participants"
             className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           />
         </div>
